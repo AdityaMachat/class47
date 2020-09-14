@@ -61,12 +61,13 @@ function draw() {
     }
   }
   drawSprites();
-  if(second()<(seconds+30)%60 && gameState==="start"){
-    textSize(25);
+  if(second()===(seconds+30)%60 && gameState==="start"){
+    gameState="play";
+    console.log("hello");
+  }else if(gameState!=="play"){
+   textSize(25);
     fill("black");
     stroke("grren")
     text("intro",200,50);
-  }else{
-    gameState="play";
   }
 }
