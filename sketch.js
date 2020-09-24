@@ -12,6 +12,9 @@ var choice = 0;
 var seconds;
 var optionA, optionB;
 var flag = 0;
+var next;
+var showText = false;
+var easterEgg;
 
 function preload() {
   image1 = loadImage("temporary.png");
@@ -29,6 +32,10 @@ function setup() {
   bg.addImage("drawingroom", drawingRoom);
   bg.addImage("Hall", hall);
 
+  optionA = createSprite(300, 200, 80, 50);
+  optionB = createSprite(500, 200, 80, 50);
+
+
   // ground= createSprite(w/2, 0,w, h);
   //ground.addImage(image1);
   //ground.scale=4;
@@ -40,6 +47,8 @@ function setup() {
   seconds = second();
 
   console.log(seconds);
+  next = createSprite(40, 40, 10, 10);
+  next.visible = false;
 }
 
 function draw() {
@@ -68,49 +77,185 @@ function draw() {
     text("You wake up in a room which you do not recognise and you hear someone ", 200, 20);
     text("calling out your enemy's name,there are two doors A and B.  ", 200, 40);
     text("Now you have to decide which room you want to go to. ", 200, 60);
-    optionA = createSprite(300, 200, 80, 50);
-    optionB = createSprite(500, 200, 80, 50);
+    optionA.visible = true;
+    optionB.visible = true;
     text("Option A", 270, 200);
     text("Option B", 470, 200);
+    text("find the hidden object in the room",400,400);
+    easterEgg=createSprite(500,40,10,10);
+    easterEgg.shapeColor="red";
+    if(mousePressedOver(easterEgg)){
+      easterEgg=null;
+      text("You found the hidden object,But there are no clues from it",400,400);
+    }
     if (mousePressedOver(optionA)) {
       flag = 1;
-      bg.changeAnimation("drawingroom", drawingRoom);
 
-    } else if (mousePressedOver(optionB)) {
+    }
+    if (mousePressedOver(optionB)) {
       flag = 2;
-      bg.changeAnimation("Hall", hall);
+
     }
 
   }
 
   if (flag === 1) {
-    text("intro", 200, 50);
+    bg.changeAnimation("drawingroom", drawingRoom);
+    optionA.visible = false;
+    optionB.visible = false;
+    next.visible = true;
     if (mousePressedOver(next)) {
-      text("intro", 200, 50);
+      showText = true;
+    }
+    if (showText === true) {
+      next.visible = false;
+      optionA.visible = true;
+      optionB.visible = true;
+      text("question1", 200, 50);
       text("Option A", 270, 200);
       text("Option B", 470, 200);
+
       if (mousePressedOver(optionA)) {
         flag = 3;
 
       } else if (mousePressedOver(optionB)) {
         flag = 4;
+      }
+    }
+  }
+
+  if (flag === 2) {
+    bg.changeAnimation("Hall", hall);
+    next.visible = true;
+    optionA.visible = false;
+    optionB.visible = false;
+
+
+    if (mousePressedOver(next)) {
+      showText = true;
+    }
+    if (showText === true) {
+      next.visible = false;
+      optionA.visible = true;
+      optionB.visible = true;
+      text("question1", 200, 50);
+      text("Option A", 270, 200);
+      text("Option B", 470, 200);
+
+      if (mousePressedOver(optionA)) {
+        flag = 5;
+
+      } else if (mousePressedOver(optionB)) {
+        flag = 6;
 
       }
     }
+  }
+  if (flag === 3) {
+    bg.changeAnimation("Hall", hall);
+    next.visible = true;
+    optionA.visible = false;
+    optionB.visible = false;
 
-    if (flag === 2) {
-      text("intro", 200, 50);
-      if (mousePressedOver(next)) {
-        text("intro", 200, 80);
-        text("Option A", 270, 200);
-        text("Option B", 470, 200);
-        if (mousePressedOver(optionA)) {
-          flag = 5;
 
-        } else if (mousePressedOver(optionB)) {
-          flag = 6;
+    if (mousePressedOver(next)) {
+      showText = true;
+    }
+    if (showText === true) {
+      next.visible = false;
+      optionA.visible = true;
+      optionB.visible = true;
+      text("question1", 200, 50);
+      text("Option A", 270, 200);
+      text("Option B", 470, 200);
 
-        }
+      if (mousePressedOver(optionA)) {
+        flag = 5;
+
+      } else if (mousePressedOver(optionB)) {
+        flag = 6;
+
+      }
+    }
+  }
+  if (flag === 4) {
+    bg.changeAnimation("Hall", hall);
+    next.visible = true;
+    optionA.visible = false;
+    optionB.visible = false;
+
+
+    if (mousePressedOver(next)) {
+      showText = true;
+    }
+    if (showText === true) {
+      next.visible = false;
+      optionA.visible = true;
+      optionB.visible = true;
+      text("question1", 200, 50);
+      text("Option A", 270, 200);
+      text("Option B", 470, 200);
+
+      if (mousePressedOver(optionA)) {
+        flag = 2;
+
+      } else if (mousePressedOver(optionB)) {
+        flag = 6;
+
+      }
+    }
+  }
+  if (flag === 5) {
+    bg.changeAnimation("Hall", hall);
+    next.visible = true;
+    optionA.visible = false;
+    optionB.visible = false;
+
+
+    if (mousePressedOver(next)) {
+      showText = true;
+    }
+    if (showText === true) {
+      next.visible = false;
+      optionA.visible = true;
+      optionB.visible = true;
+      text("question1", 200, 50);
+      text("Option A", 270, 200);
+      text("Option B", 470, 200);
+
+      if (mousePressedOver(optionA)) {
+        flag = 2;
+
+      } else if (mousePressedOver(optionB)) {
+        flag = 6;
+
+      }
+    }
+  }
+  if (flag === 6) {
+    bg.changeAnimation("Hall", hall);
+    next.visible = true;
+    optionA.visible = false;
+    optionB.visible = false;
+
+
+    if (mousePressedOver(next)) {
+      showText = true;
+    }
+    if (showText === true) {
+      next.visible = false;
+      optionA.visible = true;
+      optionB.visible = true;
+      text("question1", 200, 50);
+      text("Option A", 270, 200);
+      text("Option B", 470, 200);
+
+      if (mousePressedOver(optionA)) {
+        flag = 2;
+
+      } else if (mousePressedOver(optionB)) {
+        flag = 6;
+
       }
     }
   }
